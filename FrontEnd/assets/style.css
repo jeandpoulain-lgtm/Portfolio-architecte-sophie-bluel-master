@@ -28,15 +28,6 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-
-/* CSS modif pour fond du bouton  */
-button {    
-    /* Pour supprimer le style par défaut et repartir de zéro */
-    background: none; 
-    border: none;
-    cursor: pointer;
-}
-
 body {
 	line-height: 1;
 }
@@ -67,14 +58,6 @@ header {
 	justify-content: space-between;
 	margin: 50px 0
 }
-/* CSS modif Color */
-body{
-	background-color: #FFFEF8;
-}
-
-footer{
-	background-color: white;
-}
 section {
 	margin: 50px 0
 }
@@ -92,6 +75,7 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
+;
 }
 
 h2{
@@ -110,15 +94,22 @@ nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 }
-/* css modif Icon Insta */
-nav ul img{
-	width: 22px;
-	height: 22px;
-}
 
 li:hover {
 	color: #B1663C;
 }
+
+li a {
+	padding: 0 10px;
+	font-size: 1.2em;
+    text-decoration: none;
+    color: #333;
+}
+
+li a:hover {
+	color: #B1663C;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -190,36 +181,41 @@ margin: auto;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-/* ========================================= */
-/* partie Css Modifier pour bouton categorie */
-/* ========================================= */
-.category{
-	display: flex;
-	justify-content: center;
-	padding-bottom: 40px;
-	gap: 30px;
+.category {
+    display: flex;            
+    justify-content: center; 
+    gap: 10px;                
+    flex-wrap: wrap;         
+    margin-bottom: 50px;      
 }
 
 .category button {
-    height: 37px;
-    min-width: 100px;
-    font-family: 'Syne';
-	font-size: 16px;
-    font-weight: bold;
+    
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
     color: #1D6154;
-    background-color: FFFEF8;
-    text-align: center;
-    border: 1px solid #1D6154; 
+    background-color: white;
+    
+    padding: 10px 20px; 
+    
+    margin: 20px 5px; 
+    border: 2px solid #1D6154; 
     border-radius: 25px;
+    cursor: pointer;
+    
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.category button:hover {
-	background-color: #1D6154;
-	color: white;
+.category :hover {
+    color: white;
+    background-color: #0E2F28;
+    border-color: #0E2F28;
 }
-/* ========================================= */
-/* ========================================= */
-/* ========================================= */
 
 input[type="submit"]{
 	font-family: 'Syne';
@@ -233,9 +229,173 @@ input[type="submit"]{
 }
 
 footer nav ul {
-	height: 60px;
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
 }
 
+
+/* changement pour page login */
+
+.admin-only {
+	display: none;
+}
+
+.portfolio-header {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;     
+    gap: 20px;               
+    margin-top: 50px;        
+    margin-bottom: 20px;     
+}
+
+.portfolio-header h2 {
+    margin: 0; 
+}
+
+.btn-edit {
+    display: none; 
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: -20px;
+}
+
+.editionMode {
+    display: none; 
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: black;
+    color: white;
+    padding: 15px 0;
+}
+
+/* Utilisation de .page-connexion pour isoler le style */
+.page-connexion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.page-connexion .login-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 380px;
+    padding: 20px;
+}
+
+.page-connexion .login-card h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.page-connexion .login-card label {
+    display: block;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.page-connexion .login-card input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 25px;
+    border: none;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+    outline: none;
+    box-sizing: border-box;
+}
+
+.page-connexion #login-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #1D6154;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 50px;
+}
+
+.page-connexion #login-btn:hover {
+    background-color: #0E2F28;
+}
+
+/* ==================Boite Modal ========================= */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fond sombre semi-transparent */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal h3{
+	font-family: Syne;
+	font-weight: 700;
+	font-style: Bold;
+	font-size: 30px;
+	line-height: 100%;
+	letter-spacing: 0%;
+	text-align: center;
+
+}
+
+.modal-wrapper {
+    background: white;
+    padding: 30px;
+    width: 600px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.add-photo-btn {
+    /* Dimensions demandées */
+    width: 237px;
+    height: 36px;
+    
+    /* Centrage du texte et alignement */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Style et police */
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: white;
+    background-color: #1D6154;
+    
+    /* Suppression bordure et arrondi */
+    border: none;
+    border-radius: 60px;
+    
+    /* Marges et interaction */
+    margin: 2em auto;
+    cursor: pointer;
+
+}
