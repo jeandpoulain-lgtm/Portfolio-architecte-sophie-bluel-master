@@ -16,6 +16,7 @@ async function getDataAllWork() {
     //appel fonction
     allWork = result;
     drawPhoto(allWork);
+    drawModalGallery(allWork);
 
     } catch (error) {
         console.error(error.message);
@@ -85,6 +86,7 @@ function drawCategories(categories) {
     });
     
     buttonFilter();
+
 }
 
 //======================================================================
@@ -162,7 +164,7 @@ function checkAdminStatus() {
     if (token) {
         // --- MODE ADMIN ---
 
-        // 1. Transformer "login" en "logout"
+        //Transformer "login" en "logout"
         if (loginLink) {
             loginLink.textContent = "logout";
             loginLink.href = "#";
@@ -172,25 +174,26 @@ function checkAdminStatus() {
             });
         }
 
-        // 2. Afficher les éléments d'administration
-        if (editionMode) editionMode.style.display = "flex";
-        if (editBtn) editBtn.style.display = "inline-flex"; // ou "block" selon votre CSS
+        // Afficher les éléments d'administration
+        if (editionMode) { editionMode.style.display = "flex"; }
+        if (editBtn) { editBtn.style.display = "inline-flex"; }
 
-        // 3. Masquer la barre de filtres
+        // Masquer la barre de filtres
         if (filterBar) {
             filterBar.style.display = "none";
         }
     } else {
         // --- MODE VISITEUR ---
-        
-        // Assurer que le bouton modifier est bien masqué
-        if (editBtn) editBtn.style.display = "none";
+        if (editBtn) {
+            editBtn.style.display = "none";
+        } 
     }
 }
 
 //======================================================================
 //========================BOITE MODALE==================================
 //======================================================================
+
 // Sélection des éléments
 const modal = document.querySelector("#modal");
 const editBtn = document.querySelector("#btn-edit-portfolio");
@@ -218,8 +221,136 @@ window.addEventListener("click", (event) => {
     }
 });
 
+function drawModalGallery(works) {
+    const modalGallery = document.querySelector(".modal-gallery");
+    modalGallery.innerHTML = ""; // Vide la galerie avant d'ajouter
+
+    works.forEach(element => {
+        const figure = document.createElement("figure");
+        const img = document.createElement("img");
+        const icon = document.createElement("i");
+        icon.classList.add("fa-solid", "fa-trash-can", "delete-icon");
+        
+        img.src = element.imageUrl;
+        img.alt = element.title;
+
+        figure.appendChild(img);
+        figure.appendChild(icon);
+        modalGallery.appendChild(figure);
+
+        // Optionnel : ajouter l'événement de suppression ici
+        icon.addEventListener("click", () => {
+            deleteWork(element.id);
+        });
+    });
+}
+
+async function deleteWork(id) {
+    const token = localStorage.getItem("token"); // Récupération du token stocké lors du login
+
+    try {
+        const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`, // Envoi du token pour autorisation
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (response.ok) {
+            // Suppression réussie : on met à jour l'interface
+            console.log("Projet supprimé avec succès");
+            
+            // 1. Mettre à jour le tableau local allWork
+            allWork = allWork.filter(work => work.id !== id);
+            
+            // 2. Redessiner les deux galeries
+            drawPhoto(allWork);
+            drawModalGallery(allWork);
+
+        } else {
+            console.error("Erreur lors de la suppression :", response.status);
+            alert("Une erreur est survenue lors de la suppression.");
+        }
+    } catch (error) {
+        console.error("Erreur réseau :", error);
+    }
+}
+
 //======================================================================
-//=====================APPEL DES DIFERENTE FONCTION=====================
+//====================FONCTION ADD WORK=================================
+//======================================================================
+
+async function addWork(formData) {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        body: formData // On envoie directement le FormData
+    });
+
+    if (response.ok) {
+        // Actualiser la galerie après ajout
+        getDataAllWork(); 
+    }
+}
+
+// Sélection des éléments de navigation dans la modale
+const modalViewGallery = document.querySelector("#modal-view-gallery");
+const addPhotoForm = document.querySelector("#add-photo-form");
+const openAddFormBtn = document.querySelector("#open-add-form");
+
+// Gestion du passage de la galerie au formulaire
+openAddFormBtn.addEventListener("click", () => {
+    modalViewGallery.style.display = "none";
+    addPhotoForm.style.display = "flex";
+    
+    // On remplit le select des catégories dynamiquement
+    fillCategorySelect();
+});
+
+// Fonction pour remplir le select des catégories
+async function fillCategorySelect() {
+    const select = document.querySelector("#add-photo-form #category");
+    select.innerHTML = ""; // Vide les options existantes
+    
+    // On utilise les catégories déjà récupérées (ou un fetch si nécessaire)
+    const url = "http://localhost:5678/api/categories";
+    const response = await fetch(url);
+    const categories = await response.json();
+    
+    categories.forEach(cat => {
+        const option = document.createElement("option");
+        option.value = cat.id;
+        option.textContent = cat.name;
+        select.appendChild(option);
+    });
+}
+
+addPhotoForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    
+    const formData = new FormData(addPhotoForm);
+    
+    // Appel à votre fonction existante
+    await addWork(formData);
+    
+    // Réinitialisation de la modale
+    modal.style.display = "none";
+    addPhotoForm.style.display = "none";
+    modalViewGallery.style.display = "block";
+    addPhotoForm.reset();
+});
+
+function showGallery() {
+    document.querySelector("#add-photo-form").style.display = "none";
+    document.querySelector("#modal-view-gallery").style.display = "block";
+}
+//======================================================================
+//====================APPEL DES DIFFERENTES FONCTION====================
 //======================================================================
 checkAdminStatus();
 getDataAllWork()

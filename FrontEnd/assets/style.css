@@ -331,6 +331,7 @@ footer nav ul {
 }
 
 /* ==================Boite Modal ========================= */
+
 .modal {
     position: fixed;
     top: 0;
@@ -345,6 +346,7 @@ footer nav ul {
 }
 
 .modal h3{
+    padding: 30px;
 	font-family: Syne;
 	font-weight: 700;
 	font-style: Bold;
@@ -397,5 +399,107 @@ footer nav ul {
     /* Marges et interaction */
     margin: 2em auto;
     cursor: pointer;
+}
 
+.modal-wrapper {
+    background: white;
+    width: 630px;
+    min-height: 688px;
+    padding: 30px 104px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centre les éléments horizontalement dans la modale */
+}
+
+.modal-gallery {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 10px;
+    margin-top: 40px;
+    width: 100%;
+}
+
+/* Ajustement des vignettes pour qu'elles restent cohérentes */
+.modal-gallery figure {
+    width: 100%;
+    aspect-ratio: 76/102;
+    position: relative;
+    margin: 0;
+}
+
+.modal-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-gallery {
+    border-bottom: 1px solid #B3B3B3; 
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+}
+
+.delete-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: black;
+    color: white;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 10px;
+}
+
+* Ajout pour la bascule de vue dans la modale */
+#modal-view-gallery, #add-photo-form {
+    width: 100%;
+}
+
+#add-photo-form {
+    flex-direction: column;
+    gap: 15px;
+    padding-top: 20px;
+}
+
+#add-photo-form h3 {
+    padding: 0 0 20px 0;
+}
+
+#add-photo-form .upload-area {
+    background-color: #E8F1F6;
+    height: 170px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#add-photo-form label {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+#add-photo-form input[type="text"], 
+#add-photo-form select {
+    height: 50px;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    padding: 0 15px;
+}
+
+#add-photo-form .add-photo-btn {
+    margin-top: 20px;
+}
+
+/* Style du bouton retour si vous en ajoutez un */
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    font-size: 20px;
 }
