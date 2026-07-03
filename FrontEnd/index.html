@@ -12,10 +12,9 @@
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="script.js" defer ></script>
 </head>
-
 <body>
 	<header>
-		<div class="editionMode" style="display: none;">
+		<div class="editionMode" >
 			<i class="fa-regular fa-pen-to-square"></i> 
 			<span>Mode édition</span>
 		</div>
@@ -29,7 +28,6 @@
 			</ul>
 		</nav>
 	</header>
-
 	<main>
 		<section id="introduction">
 			<figure>
@@ -66,7 +64,6 @@
 			</form>
 		</section>
 	</main>
-
 	<footer>
 		<nav>
 			<ul>
@@ -74,14 +71,13 @@
 			</ul>
 		</nav>
 	</footer>
-
-
-		<div id="modal" class="modal" style="display: none;">
+	<div id="modal" class="modal">
 		<div class="modal-wrapper">
 			<button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
-			
+
 			<div id="modal-view-gallery">
 				<h3>Galerie photo</h3>
+				<!-- zone pour charger afficher la galerie -->
 				<div class="modal-gallery"></div>
 				<div class="separator-container"></div>
 				<div class="btn-container">
@@ -89,27 +85,37 @@
 				</div>
 			</div>
 
-			<form id="add-photo-form" style="display: none;">
-				<i class="fa-solid fa-arrow-left back-btn" onclick="showGallery()"></i>
-				
+			<div id="modal-view-add" class="hidden">
+				<button class="back-modal" id="back-to-gallery"><i class="fa-solid fa-arrow-left"></i></button>
+				<button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
 				<h3>Ajout photo</h3>
-				
-				<div class="upload-area">
-					<input type="file" id="file" name="image" accept="image/*" required>
-				</div>
+				<form id="add-work-form">
+					<!-- zone pour charger l'image -->
+					<div class="input-file">
+						<img id="default-icon" src="./assets/icons/Vector.png" alt="">
+						<img id="preview-image" src="#" alt="">
+						<label for="image" class="custom-file-upload">
+							+ Ajouter une photo
+						</label>
+						<input type="file" name="image" id="image" accept="image/*" required>
+						<p class="info-capacity">jpg, png : 4mo max</p>
+					</div>
 
-				<label for="title">Titre</label>
-				<input type="text" id="title" name="title" required>
+					<label for="title">Titre</label>
+					
+					<input type="text" name="title" id="title" required>
 
-				<label for="category">Catégorie</label>
-				<select id="category" name="category">
-					</select>
+					<label for="category">Catégorie</label>
+					<select name="category" id="category" required></select>
 
-				<div class="separator-container"></div>
-				<button type="submit" class="add-photo-btn">Valider</button>
-			</form>
+					<div class="separator-container"></div>
+
+					<div class="btn-container">
+						<button type="submit" id="submit-work">Valider</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
-
 </body>
 </html>
