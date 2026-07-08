@@ -333,10 +333,11 @@ footer nav ul {
 
 .modal {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 200px;
+    left: 720px;
+    width: 630px;
+    height: 688px;
+    border-radius: 10px;
     background: rgba(0, 0, 0, 0.5); 
     display: none;
     justify-content: center;
@@ -456,14 +457,10 @@ footer nav ul {
     text-align: center;
 }
 
-
-
-/* Style de la vue ajout */
 #modal-view-add {
     width: 100%;
 }
 
-/* Centrer tout dans le bloc gris */
 .input-file {
     display: flex;
     flex-direction: column;
@@ -471,19 +468,18 @@ footer nav ul {
     justify-content: center;
     background: #e8f1f6;
     padding: 20px;
-    position: relative; /* Pour mieux gérer l'input file si besoin */
+    position: relative; 
 }
 
-/* L'icône par défaut */
 #default-icon {
-    width: 60px; /* Adaptez la taille */
+    width: 60px; 
     margin-bottom: 15px;
 }
 
 .custom-file-upload {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #CBD6DC; /* Couleur spécifique au design du projet */
+    background-color: #CBD6DC;
     color: #306685;
     border-radius: 50px;
     cursor: pointer;
@@ -495,7 +491,6 @@ footer nav ul {
     background-color: #aebcc4;
 }
 
-/* L'aperçu */
 #preview-image {
     max-height: 150px;
     margin-bottom: 10px;

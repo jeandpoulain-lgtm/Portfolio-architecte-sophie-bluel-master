@@ -31,6 +31,9 @@ async function getDataAllWork() {
 
 function drawPhoto(works) {
     const baliseGallery = document.querySelector(".gallery");
+
+    if(!baliseGallery) return;
+
     baliseGallery.innerHTML = "";
 
     works.forEach(work => {
@@ -64,6 +67,8 @@ async function getDataCategories() {
 
 function drawCategories(categories) {
     const baliseCategory = document.querySelector(".category");
+
+    if(!baliseCategory) return;
 
     const btnAll = document.createElement("button");
     btnAll.textContent = "Tout";
@@ -118,6 +123,11 @@ if(loginForm) {
 }
 
 async function login(email, password) {
+    
+    const errorMessage = document.getElementById("login-error-message");
+    
+    errorMessage.textContent = "";
+
     try {
         const response = await fetch(`${API_URL}/users/login`, {
             method: "POST",
@@ -138,6 +148,7 @@ async function login(email, password) {
         window.location.href = "index.html";
 
     } catch (error) {
+        errorMessage.textContent = error.message;
         console.error(error.message);
     }
 }
@@ -208,6 +219,9 @@ window.addEventListener("click", (event) => {
 
 function drawModalGallery(works) {
     const modalGallery = document.querySelector(".modal-gallery");
+
+    if(!modalGallery) return;
+
     modalGallery.innerHTML = ""; 
 
     works.forEach(work => {
@@ -309,17 +323,19 @@ const labelUpload = document.querySelector(".custom-file-upload");
 const defaultIcon = document.getElementById("default-icon");
 const infoCapcity = document.querySelector(".info-capacity");
 
-inputImage.addEventListener("change", () => {
-    const file = inputImage.files[0];
-    
-    if (file) {
-        previewImage.src = URL.createObjectURL(file);
-        previewImage.classList.remove("hidden"); // On affiche l'image
+if(inputImage){
+    inputImage.addEventListener("click", () => {
+        const file = inputImage.files[0];
         
-        // On appelle la fonction de masquage
-        offPlaceholder();
-    }
-});
+        if (file) {
+            previewImage.src = URL.createObjectURL(file);
+            previewImage.classList.remove("hidden");
+            
+            // On appelle la fonction de masquage
+            offPlaceholder();
+        }
+    });
+}
 
 function offPlaceholder() {
     defaultIcon.classList.add("hidden");
@@ -356,9 +372,11 @@ function modalCategorie(pCategorie) {
 //======================================================================
 //=================== AJOUT DES TRAVAUX GALERIE ========================
 //======================================================================
-async function addElemnt() {
+async function addElement() {
 
     const addWorkForm = document.getElementById("add-work-form");
+
+    if(!addWorkForm) return;
 
     addWorkForm.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -389,7 +407,7 @@ async function addElemnt() {
         } catch (error) {
             console.error("Erreur serveur :", error);
         }
-    });
+    })
 }
 
 
@@ -399,5 +417,4 @@ async function addElemnt() {
 checkAdminStatus();
 getDataAllWork();
 getDataCategories();
-addElemnt();
-
+addElement();
