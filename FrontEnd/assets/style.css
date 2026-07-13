@@ -349,10 +349,10 @@ footer nav ul {
     padding: 30px;
 	font-family: Syne;
 	font-weight: 700;
-	font-style: Bold;
+
 	font-size: 30px;
 	line-height: 100%;
-	letter-spacing: 0%;
+	
 	text-align: center;
 
 }
@@ -448,12 +448,12 @@ footer nav ul {
 }
 
 .info-capacity{
-    font-family: Work Sans;
+    font-family: "Work Sans", sans-serif;
     font-weight: 400;
-    font-style: Regular;
+    
     font-size: 10px;
     line-height: 100%;
-    letter-spacing: 0%;
+    
     text-align: center;
 }
 

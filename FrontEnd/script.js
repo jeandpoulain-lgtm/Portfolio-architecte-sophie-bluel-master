@@ -288,19 +288,16 @@ function closeModal() {
 //======================== BOITE MODALE AJOUT ==========================
 //======================================================================
 
-// Sélection du bouton "Ajouter une photo"
-const openAddFormBtn = document.querySelector("#open-add-form");
 
-// Sélection des deux vues
+const openAddFormBtn = document.querySelector("#open-add-form");
 const modalGalleryView = document.querySelector("#modal-view-gallery");
 const modalAddView = document.querySelector("#modal-view-add");
 
-// Événement pour basculer vers le formulaire
 if (openAddFormBtn) {
     openAddFormBtn.addEventListener("click", () => {
-        // On cache la galerie
+        
         modalGalleryView.style.display = "none";
-        // On affiche le formulaire
+        
         modalAddView.style.display = "block";
     });
 }
@@ -331,7 +328,6 @@ if(inputImage){
             previewImage.src = URL.createObjectURL(file);
             previewImage.classList.remove("hidden");
             
-            // On appelle la fonction de masquage
             offPlaceholder();
         }
     });
@@ -409,7 +405,6 @@ async function addElement() {
         }
     })
 }
-
 
 //======================================================================
 //=================== APPEL DES DIFFERENTES FONCTION ===================
