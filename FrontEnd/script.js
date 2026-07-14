@@ -200,7 +200,8 @@ const closeBtn = document.querySelectorAll(".close-modal");
 const modalGalery = document.querySelector(".modal-gallery")
 
 if (editBtn) {
-    editBtn.addEventListener("click", () => {
+    editBtn.addEventListener("click", (event) => {
+        event.stopPropagation();
         openModal();
     });
 }
@@ -212,10 +213,13 @@ closeBtn.forEach(button => {
 })
 
 window.addEventListener("click", (event) => {
-    if (event.target === modal) {
+    const modalContent = document.querySelector(".modal-wrapper");
+    
+    if (modal.style.display === "flex" && modalContent && !modalContent.contains(event.target)) {
+        console.log("Clic à l'extérieur détecté : fermeture");
         closeModal();
     }
-});
+})
 
 function drawModalGallery(works) {
     const modalGallery = document.querySelector(".modal-gallery");
@@ -275,13 +279,12 @@ function openModal() {
 }
 
 function closeModal() {
+
     modal.style.display = "none";
 
-    resetModalView();
     resetAddForm();
 
-    modalGalleryView.classList.remove("hidden");
-    modalAddView.classList.add("hidden");
+    resetModalView();
 }
 
 //======================================================================
@@ -321,7 +324,7 @@ const defaultIcon = document.getElementById("default-icon");
 const infoCapcity = document.querySelector(".info-capacity");
 
 if(inputImage){
-    inputImage.addEventListener("click", () => {
+    inputImage.addEventListener("change", () => {
         const file = inputImage.files[0];
         
         if (file) {
