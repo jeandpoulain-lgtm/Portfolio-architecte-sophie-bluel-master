@@ -30,14 +30,14 @@ async function getDataAllWork() {
 }
 
 function drawPhoto(works) {
-    const baliseGallery = document.querySelector(".gallery");
+    const baliseGallery = document.querySelector(".gallery"); //parent
 
-    if(!baliseGallery) return;
+    if(!baliseGallery) return; // Condition de secu
 
     baliseGallery.innerHTML = "";
 
     works.forEach(work => {
-        const figure = document.createElement("figure");
+        const figure = document.createElement("figure");//nouveaux element html
         const img = document.createElement("img");
         const caption = document.createElement("figcaption");
 
@@ -45,9 +45,27 @@ function drawPhoto(works) {
         img.alt = work.title;
         caption.textContent = work.title;
 
-        figure.appendChild(img);
+        figure.appendChild(img);//ajoute l enfant aux parent
         figure.appendChild(caption);
         baliseGallery.appendChild(figure);
+    });
+}
+
+//======================================================================
+//==========================BOUTON FILTRES==============================
+//======================================================================
+function buttonFilter(){
+    const mesBoutons = document.querySelectorAll(".category button");
+    mesBoutons.forEach(bouton => {
+        bouton.addEventListener("click", (event) => {
+            const id = parseInt(event.target.dataset.id); 
+            if (id === 0 ) {
+                drawPhoto(allWork);
+            }else {
+                const filteredWorks = allWork.filter(work => work.categoryId === id);//nouveaux tableau avec le bon id
+                drawPhoto(filteredWorks);
+            }
+        });
     });
 }
 
@@ -87,24 +105,6 @@ function drawCategories(categories) {
     
     buttonFilter();
 
-}
-
-//======================================================================
-//==========================BOUTON FILTRES==============================
-//======================================================================
-function buttonFilter(){
-    const mesBoutons = document.querySelectorAll(".category button");
-    mesBoutons.forEach(bouton => {
-        bouton.addEventListener("click", (event) => {
-            const id = parseInt(event.target.dataset.id);
-            if (id === 0 ) {
-                drawPhoto(allWork);
-            }else {
-                const filteredWorks = allWork.filter(work => work.categoryId === id);
-                drawPhoto(filteredWorks);
-            }
-        });
-    });
 }
 
 //======================================================================
@@ -378,9 +378,9 @@ async function addElement() {
     if(!addWorkForm) return;
 
     addWorkForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
+        e.preventDefault(); //empeche le rechargement de la page
         const token = localStorage.getItem("token");
-        const formData = new FormData(addWorkForm);
+        const formData = new FormData(addWorkForm); //important
 
         try {
             const response = await fetch(`${API_URL}/works`, {
