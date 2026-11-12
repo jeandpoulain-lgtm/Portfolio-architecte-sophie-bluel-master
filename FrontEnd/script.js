@@ -175,13 +175,11 @@ function checkAdminStatus() {
                 window.location.reload();
             });
         }
-
+        //affichage on off 
         if (editionMode) { editionMode.style.display = "flex"; }
         if (editBtn) { editBtn.style.display = "inline-flex"; }
+        if (filterBar) { filterBar.style.display = "none";}
 
-        if (filterBar) {
-            filterBar.style.display = "none";
-        }
     } else {
         // --- MODE VISITEUR ---
         if (editBtn) {
@@ -224,7 +222,7 @@ window.addEventListener("click", (event) => {
 function drawModalGallery(works) {
     const modalGallery = document.querySelector(".modal-gallery");
 
-    if(!modalGallery) return;
+    if(!modalGallery) return;//important
 
     modalGallery.innerHTML = ""; 
 

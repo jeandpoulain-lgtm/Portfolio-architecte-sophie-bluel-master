@@ -1,20 +1,16 @@
-# Portfolio-architecte-sophie-bluel
+# Sophie Bluel — Portfolio d'architecte d'intérieur
 
-Code du projet 6 d'intégrateur web.
+## 📌 À propos
+Ce projet fait partie du parcours **Intégrateur Web** d'OpenClassrooms. L'objectif était de créer une page web dynamique en JavaScript vanilla communicant avec une API REST, comprenant une galerie de travaux filtrable et une interface d'administration sécurisée.
 
-## Architecture
+## 🚀 Fonctionnalités
+- Récupération et affichage dynamique des projets depuis une **API REST** (`fetch`).
+- Système de filtrage interactif des réalisations par catégorie.
+- Authentification de l'administrateur avec gestion de session via **Token JWT** (`localStorage`/`sessionStorage`).
+- **Modale d'administration** permettant d'ajouter de nouveaux projets (upload d'image et formulaire) ou de supprimer des travaux existants en temps réel sans rechargement de page.
 
-Ce repo git contient les 2 briques logicielles du projet 
-- Frontend
-- Backend
-
-## Pour le lancer le code
-### Backend
-Ouvrir le dossier Backend et lire le README.md
-
-### Frontend
-Ouvrir le dossier Frontend et lancer liveserver de votre IDE
- 
-## Astuce
- 
-Si vous désirez afficher le code du backend et du frontend, faites le dans 2 instances de VSCode différentes pour éviter tout problème
+## 🛠️ Stack technique
+- **HTML5 / CSS3**
+- **JavaScript (ES6+ / Vanilla JS)**
+- **API REST / Swagger**
+- **Git & GitHub**
